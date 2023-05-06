@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="icon" href="../static/icons/beer2.png" type="image/png">
+    <style>
+        .copyrighttext{
+          width: 100%;
+
+          text-align: center;
+          padding: 8px 40px;
+          color: #fff;
+        }
+        .footer {
+          border-radius: 25px;
+          border: 10px solid transparent;
+          border-image: linear-gradient(45deg,#03a9f4,#ff0058, #4dff03,#ffbc00) 1;
+
+          color: white;
+        }
+        .txt{
+          background-image: url('resources/static/images/back.png');
+          background-repeat: no-repeat;
+          background-size: cover;
+          color: #fff;
+          padding: 30px;
+          width: 600px;
+        }
+        .txt h2{
+          text-align: center;
+          font-family: "Comfortaa";
+          margin-bottom: 20px;
+        }
+        .txt p{
+          text-align: justify;
+          font-family: 'Caveat', cursive;
+        font-family: 'Comfortaa', cursive;
+        font-family: 'Kolker Brush', cursive;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        }
+        .btn{
+          display: inline-block;
+          font-size: 18px;
+          padding: 24px 70px;
+          background: linear-gradient(45deg,#03a9f4,#ff0058, #4dff03,#ffbc00);
+          color: #fff;
+          border-radius: 40px;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          position: relative;
+          box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+          transition: box-shadow 0.25s;
+          z-index: 2;
+        }
+        .btn:active{
+          background: #d80972;
+          box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+        }
+
+
+    </style>
+</head>
+<body style="background-color:  #000000;">
+<div class="my-4 container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-11 col-xl-11">
+
+
+                <div th:if="${param.logout}" class="mr-5" style="color: #ffbc00; position: absolute; right: 0">You have successfully logged out.</div>
+
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <img alt="beer?" class="d-block mx-5" width="75px" src="../static/icons/beer.png" th:src="@{/icons/beer.png}">
+                    <a href="/index">
+                        <span class="display-4" style="color: #ff0058;">Near</span>
+                        <span class="display-4" style="color: #4dff03;">The</span>
+                        <span class="display-4" style="color: #ffbc00;">RTU</span>
+                        <span class="display-4" style="color: #03a9f4;">Mirea</span>
+                    </a>
+                    <button class="navbar-toggler" style="border: 3px solid white; border-radius: 20px" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" style="color: white;">
+                            <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active" >
+                                <a class="nav-link h4 px-4 mt-3" style="color: white; border: 3px solid #ff0058; border-radius: 30px" href="/home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link h4 px-4 mt-3" style="color: white; border: 3px solid #4dff03; border-radius: 30px" href="/order">Reserve</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle h4 px-4 mt-3" id="navbarDropdownMenuLink" style="color: #03a9f4;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${username}"></a>
+                                <div class="dropdown-menu dropdown-menu-right p-0" style="border: none; background-color: #000000;" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item mb-2" th:attr="href=${linkInOrAccount}" style="background: linear-gradient(45deg,#03a9f4,#ff0058, #4dff03,#ffbc00); color: white; border-radius: 25px" th:text="${textInOrAccount}">LogIn</a>
+                                    <a class="dropdown-item" th:attr="href=${linkOutOrUp}" style="background-color: grey; color: white; border-radius: 25px" th:text="${textOutOrUp}">LogOut</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <div class="row justify-content-center align-items-center text-center">
+                    <div class="col-10 col-xl-5">
+                        <div class="txt">
+                            <h2>Меню в Near The RTU MIREA</h2>
+                            <p>За блюда в Near the RTU MIREA отвечает слаженная команда молодых поваров под
+                                предводительством Ивана Петрова. В меню — колбаски собственного производства
+                                из натурального мяса, куриные крылышки, ребра, бургеры, морепродукты, холодные
+                                и горячие закуски, пицца, салаты, комплексные домашние обеды по будням.</p><br>
+
+                            <p>Бар предлагает более 150 сортов разливного пива и бутылочных позиций из
+                                пивоварен со всего мира, в том числе и редкие вкусы известных брендов,
+                                трапписты и безалкогольное пиво. В баре регулярно появляются гостевые сорта
+                                крафтового пива известных пивоварен.</p><br>
+
+                            <p>В барной карте классические коктейли, шоты, коктейли с пивом, шампань-
+                                коктейли, горячие напитки и безалкогольные коктейли и лимонады. В винной к
+                                арте вина по бокалам и бутылкам из Франции, Италии, Испании, ЮАР, стран Нового
+                                Света, России и Грузии.</p><br>
+
+                            <p>В нашем баре транслируют спортивные матчи,
+                                организуют вечеринки с приглашенными диджеями и корпоративные
+                                мероприятия для больших компаний, празднуют дни рождения.</p><br>
+
+                            <button class="btn" id="btn" type="button" name="button">Read more</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <footer class="footer py-3" style=" color: white; border-radius: 25px">
+                    <div class="mx-5">
+                        <div class="row justify-content-center text-center">
+                            <div class="col">Contacts! Just in case...</div>
+                        </div>
+                        <div class="row justify-content-center text-center">
+                            <div class="col-6 col-xl-3">Мамонова Е.А.</div>
+                            <div class="col-6 col-xl-3">ИКБО-24-21</div>
+                            <div class="col-6 col-xl-3">
+                                <img alt="vk?" class="mx-auto" width="30px" src="../static/icons/vk.png" th:src="@{/icons/vk.png}">
+                                <a class="text-light" target="_blank" href="https://vk.com/id198165768">vk.com/kate.mamonova</a>
+                            </div>
+
+                            <div class="col-6 col-xl-3">
+                                <img alt="github?" class="mx-auto" width="30px" src="../static/icons/mail.png" th:src="@{/icons/mail.png}">
+                                katevajs_mamonova@mail.ru
+                            </div>
+                            <div class="col-6 col-xl-3">
+                                <img alt="github?" class="mx-auto" width="30px" src="../static/icons/github.png" th:src="@{/icons/github.png}">
+                                <a class="text-light" target="_blank" href="https://github.com/ekaterina950">github.com/ekaterina950</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </footer>
+                <div class="copyrighttext">
+                    <p>2023© Student MIREA. ALL RIGHTS RESERVED</p>
+                </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

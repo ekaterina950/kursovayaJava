@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link rel="icon" href="../static/icons/beer2.png" type="image/png">
+
+    <script>
+        function redirect() {
+            location.href="/order"
+        }
+    </script>
+    <style>
+        .copyrighttext{
+          width: 100%;
+
+          text-align: center;
+          padding: 8px 40px;
+          color: #fff;
+        }
+        .footer {
+          border-radius: 25px;
+          border: 10px solid transparent;
+          border-image: linear-gradient(45deg,#03a9f4,#ff0058, #4dff03,#ffbc00) 1;
+
+          color: white;
+        }
+        .form-control {
+          border-radius: 20px;
+          border: 2px solid transparent;
+          border-image: linear-gradient(45deg,#03a9f4,#ff0058, #4dff03,#ffbc00) 1;
+          background-color: black;
+
+        }
+
+        .form-control:focus {
+          outline: none;
+          box-shadow: none;
+          background-color: black;
+          color: white;
+        }
+
+        .btn{
+          background: linear-gradient(45deg,#03a9f4,#ff0058, #4dff03,#ffbc00);
+          color: #000000;
+          border: none
+        }
+    </style>
+</head>
+<body style="background-color:  black;">
+<div class="my-4 container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-11 col-xl-11">
+            <div style="background-color: black; border-radius: 25px; overflow: hidden">
+
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <img alt="beer?" class="d-block mx-5" width="75px" src="../static/icons/beer.png" th:src="@{/icons/beer.png}">
+                    <a href="/index">
+                        <span class="display-4" style="color: #ff0058;">Near</span>
+                        <span class="display-4" style="color: #4dff03;">The</span>
+                        <span class="display-4" style="color: #ffbc00;">RTU</span>
+                        <span class="display-4" style="color: #03a9f4;">Mirea</span>
+                    </a>
+                    <button class="navbar-toggler" style="border: 3px solid white; border-radius: 20px" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" style="color: white;">
+                            <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active" >
+                                <a class="nav-link h4 px-4 mt-3" style="color: white; border: 3px solid #ff0058; border-radius: 30px" href="/home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link h4 px-4 mt-3" style="color: white; border: 3px solid #4dff03; border-radius: 30px" href="/order">Reserve</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle h4 px-4 mt-3" id="navbarDropdownMenuLink" style="color: #03a9f4;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${username}"></a>
+                                <div class="dropdown-menu dropdown-menu-right p-0" style="border: none; background-color: #000000;" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item mb-2" th:attr="href=${linkInOrAccount}" style="background: linear-gradient(45deg,#03a9f4,#ff0058, #4dff03,#ffbc00); color: white; border-radius: 25px" th:text="${textInOrAccount}">LogIn</a>
+                                    <a class="dropdown-item" th:attr="href=${linkOutOrUp}" style="background-color: grey; color: white; border-radius: 25px" th:text="${textOutOrUp}">LogOut</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <div class="row justify-content-center text-center">
+                    <div class="col-10 col-xl-5">
+                        <p class="h3 font-weight-normal my-4" style="color: white;">Нужен столик? Так чего вы ждете!</p>
+
+                        <div style="background-color: black; border-radius: 25px">
+                            <img alt="beer?" class="mx-auto d-block" width="200px" src="../static/icons/beer2.png" th:src="@{/icons/beer2.png}">
+                            <p class="text-center display-4" style="color: white">Reservation</p>
+
+                            <form action="#" th:action="@{/order}" th:object="${order}" method="post">
+
+                                <div class="mx-5 px-5 form-group form-group-lg">
+                                    <label for="fullname" class="h4" style="color: white;">Your fullname?</label>
+                                    <input type="text" id="fullname" class="form-control input-lg" th:field="*{fullname}"/>
+                                    <label for="fullname" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" style="color: white"></label>
+                                </div>
+
+                                <div class="mx-5 px-5 form-group form-group-lg">
+                                    <label for="people" class="h4" style="color: white">How many people?</label>
+                                    <input type="text" min="1"placeholder="How many people?" id="people" class="form-control" th:field="*{people}"/>
+                                    <label for="people" th:if="${#fields.hasErrors('people')}" th:errors="*{people}" style="color: white"></label>
+                                </div>
+
+                                <div class="mx-5 px-5 form-group form-group-lg">
+                                    <label for="contact" class="h4" style="color: white">Your phone:</label>
+                                    <input type="text" placeholder="+7(___)-___-__-__" id="contact" class="form-control" th:field="*{contact}"/>
+                                    <label for="contact" th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}" style="color: white"></label>
+                                </div>
+
+                                <div class="mx-5 px-5 form-group form-group-lg">
+                                    <label for="data" class="h4" style="color: white">Date:</label>
+                                    <input  id="data" type="text" placeholder="DD.MM.YYYY"class="form-control" th:field="*{data}"/>
+                                    <select th:field="*{time}" name="hours" class="form-control" >
+                                        <option value="hour-select">Select Hour</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="16:30">16:30</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="17:30">17:30</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="18:30">18:30</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="19:30">19:30</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="20:30">20:30</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="21:30">21:30</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="22:30">22:30</option>
+                                        <option value="23:00">23:00</option>
+                                        <option value="23:30">23:30</option>
+                                    </select>
+                                </div>
+
+                                <div class="d-flex justify-content-center m-3">
+                                    <button th:attr="hidden=${confirm}" type="submit" class="btn btn-secondary btn-lg" style="color: black; background-color: white; border-color: white; border-radius: 30px">Confirm!</button>
+                                </div>
+                            </form>
+
+                            <p class="text-center h1 fw-bold m-3 pb-3" style="color: white" th:text="${message}">&nbsp</p>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+                <footer class="footer py-3" style=" color: white; border-radius: 25px">
+                    <div class="mx-5">
+                        <div class="row justify-content-center text-center">
+                            <div class="col">Contacts! Just in case...</div>
+                        </div>
+                        <div class="row justify-content-center text-center">
+                            <div class="col-6 col-xl-3">Мамонова Е.А.</div>
+                            <div class="col-6 col-xl-3">ИКБО-24-21</div>
+                            <div class="col-6 col-xl-3">
+                                <img alt="vk?" class="mx-auto" width="30px" src="../static/icons/vk.png" th:src="@{/icons/vk.png}">
+                                <a class="text-light" target="_blank" href="https://vk.com/id198165768">vk.com/kate.mamonova</a>
+                            </div>
+
+                            <div class="col-6 col-xl-3">
+                                <img alt="github?" class="mx-auto" width="30px" src="../static/icons/mail.png" th:src="@{/icons/mail.png}">
+                                katevajs_mamonova@mail.ru
+                            </div>
+                            <div class="col-6 col-xl-3">
+                                <img alt="github?" class="mx-auto" width="30px" src="../static/icons/github.png" th:src="@{/icons/github.png}">
+                                <a class="text-light" target="_blank" href="https://github.com/ekaterina950">github.com/ekaterina950</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </footer>
+                <div class="copyrighttext">
+                    <p>2023© Student MIREA. ALL RIGHTS RESERVED</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
